@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bybLrtv8bMT/vbkfgdbEel7Q4T3EK3uLu2nfyZlClGdvWY6uw8vzX6s84KVwPu2+T3EJevBSvf6S47+0q2tRRQ==",
+  "dgSpecHash": "G48gH2jJoTwMVsl7NAfr07cBOnMv50umNgCH+QK27AHigsYdvJmgPmbdTQhAk16eHZrOF9EcetEGWY18ykoBmA==",
   "success": true,
-  "projectFilePath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Core\\QSpace.Core.csproj",
+  "projectFilePath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Core\\QSpace.Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

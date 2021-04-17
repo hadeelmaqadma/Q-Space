@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DWlVpZk0R8BdIiia14yms0J+abPjJV3rKubJziPdtkfUTB6FjdmQZ62cflczwEKwzjPo+Crcpk+vCku7sJJVQQ==",
+  "dgSpecHash": "rZjeVAkcMTNK0piQjoz3R/j+JOehca0vl0GrFwmk1BueQO8lhj0WaxuPAvIIF14zyS7Wx76SEk45FdQzHs/0cw==",
   "success": true,
-  "projectFilePath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Infrastructure\\QSpace.Infrastructure.csproj",
+  "projectFilePath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Infrastructure\\QSpace.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hendi\\.nuget\\packages\\mailkit\\2.11.1\\mailkit.2.11.1.nupkg.sha512",
     "C:\\Users\\hendi\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",

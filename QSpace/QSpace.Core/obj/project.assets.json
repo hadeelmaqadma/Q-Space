@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualStudioFiles\\QSpace\\QSpace.Core\\QSpace.Core.csproj",
+      "projectUniqueName": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Core\\QSpace.Core.csproj",
       "projectName": "QSpace.Core",
-      "projectPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Core\\QSpace.Core.csproj",
+      "projectPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Core\\QSpace.Core.csproj",
       "packagesPath": "C:\\Users\\hendi\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Core\\obj\\",
+      "outputPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hendi\\AppData\\Roaming\\NuGet\\NuGet.Config",

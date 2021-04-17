@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VisualStudioFiles\\QSpace\\QSpace.API\\QSpace.API.csproj": {}
+    "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.API\\QSpace.API.csproj": {}
   },
   "projects": {
-    "D:\\VisualStudioFiles\\QSpace\\QSpace.API\\QSpace.API.csproj": {
+    "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.API\\QSpace.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VisualStudioFiles\\QSpace\\QSpace.API\\QSpace.API.csproj",
+        "projectUniqueName": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.API\\QSpace.API.csproj",
         "projectName": "QSpace.API",
-        "projectPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.API\\QSpace.API.csproj",
+        "projectPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.API\\QSpace.API.csproj",
         "packagesPath": "C:\\Users\\hendi\\.nuget\\packages\\",
-        "outputPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.API\\obj\\",
+        "outputPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\hendi\\AppData\\Roaming\\NuGet\\NuGet.Config",

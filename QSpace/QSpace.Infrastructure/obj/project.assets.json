@@ -1886,11 +1886,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualStudioFiles\\QSpace\\QSpace.Infrastructure\\QSpace.Infrastructure.csproj",
+      "projectUniqueName": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Infrastructure\\QSpace.Infrastructure.csproj",
       "projectName": "QSpace.Infrastructure",
-      "projectPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Infrastructure\\QSpace.Infrastructure.csproj",
+      "projectPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Infrastructure\\QSpace.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\hendi\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Infrastructure\\obj\\",
+      "outputPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hendi\\AppData\\Roaming\\NuGet\\NuGet.Config",

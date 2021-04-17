@@ -7,3 +7,12 @@ D:\VisualStudioFiles\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace
 D:\VisualStudioFiles\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.csproj.CoreCompileInputs.cache
 D:\VisualStudioFiles\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.dll
 D:\VisualStudioFiles\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.pdb
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\bin\Debug\netcoreapp3.1\QSpace.Infrastructure.deps.json
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\bin\Debug\netcoreapp3.1\QSpace.Infrastructure.dll
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\bin\Debug\netcoreapp3.1\QSpace.Infrastructure.pdb
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.csprojAssemblyReference.cache
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.AssemblyInfoInputs.cache
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.AssemblyInfo.cs
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.csproj.CoreCompileInputs.cache
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.dll
+D:\VisualStudioFiles\Repos\Q-Space\QSpace\QSpace.Infrastructure\obj\Debug\netcoreapp3.1\QSpace.Infrastructure.pdb

@@ -5962,11 +5962,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VisualStudioFiles\\QSpace\\QSpace.Data\\QSpace.Data.csproj",
+      "projectUniqueName": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Data\\QSpace.Data.csproj",
       "projectName": "QSpace.Data",
-      "projectPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Data\\QSpace.Data.csproj",
+      "projectPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Data\\QSpace.Data.csproj",
       "packagesPath": "C:\\Users\\hendi\\.nuget\\packages\\",
-      "outputPath": "D:\\VisualStudioFiles\\QSpace\\QSpace.Data\\obj\\",
+      "outputPath": "D:\\VisualStudioFiles\\Repos\\Q-Space\\QSpace\\QSpace.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hendi\\AppData\\Roaming\\NuGet\\NuGet.Config",
