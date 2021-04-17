@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DbEntities\" />
+    <ProjectReference Include="..\QSpace.Core\QSpace.Core.csproj" />
   </ItemGroup>
 
 </Project>
