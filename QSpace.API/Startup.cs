@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QSpace.Data;
 using QSpace.Data.Data;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,10 @@ namespace QSpace.API
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<QSpaceDbContext>();
             services.AddControllersWithViews();
+
+            services.AddSwaggerGen();
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,7 +57,12 @@ namespace QSpace.API
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QSpace");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseRouting();
 
             app.UseAuthentication();

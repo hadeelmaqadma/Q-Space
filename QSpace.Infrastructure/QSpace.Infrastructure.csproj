@@ -14,9 +14,4 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\QSpace.Core\QSpace.Core.csproj" />
-    <ProjectReference Include="..\QSpace.Data\QSpace.Data.csproj" />
-  </ItemGroup>
-
 </Project>

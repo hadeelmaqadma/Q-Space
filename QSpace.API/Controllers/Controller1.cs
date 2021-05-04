@@ -1,19 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace QSpace.API.Controllers
 {
-    public class HomeController : Controller
+    public class Controller1 : BaseController
     {
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Methode1()
         {
-            return Redirect("/swagger");
+            return Ok("Hend: Hi :)");
         }
-
     }
 }
