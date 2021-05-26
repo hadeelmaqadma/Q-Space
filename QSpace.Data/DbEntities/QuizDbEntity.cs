@@ -18,7 +18,7 @@ namespace QSpace.Data.DbEntities
         public List<MCQuestionDbEntity> Questions { get; set; }
         public List<SessionDbEntity> Sessions { get; set; }
         public QuizDbEntity()
-        {
+    {
             IsActive = false;
             IsCompleted = false;
         }

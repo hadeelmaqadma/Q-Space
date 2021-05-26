@@ -7,11 +7,17 @@ using System.Text;
 
 namespace QSpace.Data.Data
 {
-    public class QSpaceDbContext : IdentityDbContext
+    public class QSpaceDbContext : IdentityDbContext<User>
     {
         public QSpaceDbContext(DbContextOptions<QSpaceDbContext> options)
             : base(options)
         {
+
+        }
+        public DbSet<QuizDbEntity> Quizes { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<QuizDbEntity>().HasQueryFilter(x => !x.IsDeleted);
         }
         public DbSet<MCQuestionDbEntity> MCQustions { get; set; }
         public DbSet<QuizDbEntity> Quizzes { get; set; }
