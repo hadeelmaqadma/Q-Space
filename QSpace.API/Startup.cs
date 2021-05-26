@@ -9,6 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QSpace.Data;
 using QSpace.Data.Data;
+using QSpace.Infrastructure.AutoMapper;
+using QSpace.Infrastructure.Services.MCQuestion;
+using QSpace.Infrastructure.Services.Quiz;
+using QSpace.Infrastructure.Services.Student;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +40,11 @@ namespace QSpace.API
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<QSpaceDbContext>();
             services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
+            services.AddScoped<IQuizService, QuizService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IMCQuestionService, MCQuestionService>();
             services.AddSwaggerGen();
         }
 
