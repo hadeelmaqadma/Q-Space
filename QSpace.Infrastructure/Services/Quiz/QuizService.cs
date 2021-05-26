@@ -29,7 +29,11 @@ namespace QSpace.Infrastructure.Services.Quiz
             var quiz = _DB.Quizzes.Find(Id);
             return quiz == null ? null : _mapper.Map<QuizViewModel>(quiz);
         }
-        
+        public List<MCQuestionViewModel> GetQuestions(int Id) {
+            var questions = _DB.Quizzes.Include(x => x.Questions).Where(y => !y.IsDeleted && y.IsActive && y.IsActive)
+                .Select(q => q.Questions).ToList();
+            return _mapper.Map<List<MCQuestionViewModel>>(questions);
+        }
         public void Create(CreateQuizDto dto)
         {
             /*var quiz = new QuizDbEntity()

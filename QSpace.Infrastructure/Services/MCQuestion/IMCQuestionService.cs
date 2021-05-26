@@ -8,5 +8,7 @@ namespace QSpace.Infrastructure.Services.MCQuestion
     public interface IMCQuestionService
     {
         void Create(CreateMCQuestionDto dto);
+        void Update(UpdateMCQuestionDto dto);
+        bool Delete(int Id);
     }
 }

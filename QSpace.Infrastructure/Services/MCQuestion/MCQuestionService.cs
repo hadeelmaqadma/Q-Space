@@ -24,6 +24,43 @@ namespace QSpace.Infrastructure.Services.MCQuestion
             _DB.MCQustions.Add(mcq);
             _DB.SaveChanges();
         }
-
+        public void Update(UpdateMCQuestionDto dto) {
+            var mcq = _DB.MCQustions.Find(dto.Id);
+            if (mcq != null) {
+                if (!dto.A.Equals(mcq.A))
+                    mcq.A = dto.A;
+                if (!dto.B.Equals(mcq.B))
+                    mcq.B = dto.B;
+                if (!dto.C.Equals(mcq.C))
+                    mcq.C = dto.C;
+                if (!dto.D.Equals(mcq.D))
+                    mcq.D = dto.D;
+                if (!dto.CorrectAnswer.Equals(mcq.CorrectAnswer))
+                    mcq.CorrectAnswer = dto.CorrectAnswer;
+                if (!dto.Statement.Equals(mcq.Statement))
+                    mcq.Statement = dto.Statement;
+                if (dto.Time != mcq.Time)
+                    mcq.Time = dto.Time;
+                if (dto.Score != mcq.Score)
+                    mcq.Score = dto.Score;
+                if (dto.DifficultyLevel != mcq.DifficultyLevel)
+                    mcq.DifficultyLevel = dto.DifficultyLevel;
+            }
+            _DB.MCQustions.Update(mcq);
+            _DB.SaveChanges();
+        }
+        public bool Delete(int Id)
+        {
+            var mcq = _DB.MCQustions.Find(Id);
+            if (mcq != null)
+            {
+                mcq.IsDeleted = true;
+                _DB.MCQustions.Update(mcq);
+                _DB.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+       
     }
 }

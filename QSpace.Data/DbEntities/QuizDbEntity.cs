@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace QSpace.Data.DbEntities
 {
     public class QuizDbEntity : BaseDbEntity
     {
+        [Required]
         public string Name { get; set; }    
         public bool IsActive { get; set; }
         public bool IsCompleted { get; set; }
-
+        
         public int InstructorId { get; set; }
 
         public User Instructor { get; set; }

@@ -10,6 +10,7 @@ namespace QSpace.Infrastructure.Services.Quiz
     {
         QuizViewModel GetById(int Id);
         List<QuizViewModel> GetAll();
+        List<MCQuestionViewModel> GetQuestions(int Id);
         void Create(CreateQuizDto dto);
         void Update(UpdateQuizDto dto);
         
