@@ -2,13 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace QSpace.Infrastructure.Services.MCQuestion
 {
     public interface IMCQuestionService
     {
-        void Create(CreateMCQuestionDto dto);
-        void Update(UpdateMCQuestionDto dto);
+        Task Create(CreateMCQuestionDto dto);
+        Task Update(UpdateMCQuestionDto dto);
+        void ChangeActive(int Id);
         bool Delete(int Id);
+
     }
 }

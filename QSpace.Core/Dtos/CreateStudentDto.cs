@@ -10,7 +10,7 @@ namespace QSpace.Core.Dtos
         [Required]
         public string Name { get; set; }
         public string email { get; set; }
-
+        [Required]
         public int SessionId { get; set; }
     }
 }

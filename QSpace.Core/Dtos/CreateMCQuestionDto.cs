@@ -30,6 +30,6 @@ namespace QSpace.Core.Dtos
         public DifficultyLevel DifficultyLevel { get; set; }
         public IFormFile AttachmentURL { get; set; }
         [Required]
-        public int QuizId { get; set; }
+        public int QuizId { get; set;}
     }
 }

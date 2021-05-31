@@ -10,7 +10,7 @@ using QSpace.Data.Data;
 namespace QSpace.Data.Migrations
 {
     [DbContext(typeof(QSpaceDbContext))]
-    [Migration("20210526125842_init")]
+    [Migration("20210531220643_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,21 +152,178 @@ namespace QSpace.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("QSpace.Data.DbEntities.QuizesDbEntity", b =>
+            modelBuilder.Entity("QSpace.Data.DbEntities.MCQuestionDbEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("A")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AttachmentURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("B")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("C")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CorrectAnswer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("D")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DifficultyLevel")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Score")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Statement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Time")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("QuizId");
 
-                    b.ToTable("QuizesDbEntity");
+                    b.ToTable("MCQustions");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.QuizDbEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("InstructorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstructorId");
+
+                    b.ToTable("Quizzes");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.SessionDbEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double?>("AvgScore")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("HeldAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<double?>("MeanScore")
+                        .HasColumnType("float");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("StudentsCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.StudentDbEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Score")
+                        .HasColumnType("float");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.StudentQuestionsDbEntity", b =>
+                {
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.HasKey("QuestionId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentsQuestions");
                 });
 
             modelBuilder.Entity("QSpace.Data.DbEntities.User", b =>
@@ -301,11 +458,89 @@ namespace QSpace.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("QSpace.Data.DbEntities.QuizesDbEntity", b =>
+            modelBuilder.Entity("QSpace.Data.DbEntities.MCQuestionDbEntity", b =>
                 {
-                    b.HasOne("QSpace.Data.DbEntities.User", null)
+                    b.HasOne("QSpace.Data.DbEntities.QuizDbEntity", "Quiz")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.QuizDbEntity", b =>
+                {
+                    b.HasOne("QSpace.Data.DbEntities.User", "Instructor")
                         .WithMany("Quizes")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Instructor");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.SessionDbEntity", b =>
+                {
+                    b.HasOne("QSpace.Data.DbEntities.QuizDbEntity", "Quiz")
+                        .WithMany("Sessions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.StudentDbEntity", b =>
+                {
+                    b.HasOne("QSpace.Data.DbEntities.SessionDbEntity", "Session")
+                        .WithMany("Students")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Session");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.StudentQuestionsDbEntity", b =>
+                {
+                    b.HasOne("QSpace.Data.DbEntities.MCQuestionDbEntity", "Question")
+                        .WithMany("StudentsQuestions")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("QSpace.Data.DbEntities.StudentDbEntity", "Student")
+                        .WithMany("StudentsQuestions")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.MCQuestionDbEntity", b =>
+                {
+                    b.Navigation("StudentsQuestions");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.QuizDbEntity", b =>
+                {
+                    b.Navigation("Questions");
+
+                    b.Navigation("Sessions");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.SessionDbEntity", b =>
+                {
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.StudentDbEntity", b =>
+                {
+                    b.Navigation("StudentsQuestions");
                 });
 
             modelBuilder.Entity("QSpace.Data.DbEntities.User", b =>

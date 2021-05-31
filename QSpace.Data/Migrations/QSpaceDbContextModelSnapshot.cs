@@ -70,71 +70,6 @@ namespace QSpace.Data.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -162,13 +97,9 @@ namespace QSpace.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
@@ -206,13 +137,9 @@ namespace QSpace.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
@@ -224,7 +151,6 @@ namespace QSpace.Data.Migrations
                 });
 
             modelBuilder.Entity("QSpace.Data.DbEntities.MCQuestionDbEntity", b =>
-            modelBuilder.Entity("QSpace.Data.DbEntities.QuizesDbEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -234,57 +160,36 @@ namespace QSpace.Data.Migrations
                     b.Property<string>("A")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AttachmentURL")
                         .HasColumnType("nvarchar(max)");
-                    b.HasKey("Id");
 
                     b.Property<string>("B")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-                    b.HasIndex("UserId");
 
                     b.Property<string>("C")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-                    b.ToTable("QuizesDbEntity");
-                });
 
                     b.Property<string>("CorrectAnswer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-            modelBuilder.Entity("QSpace.Data.DbEntities.User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("D")
                         .IsRequired()
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("DifficultyLevel")
                         .HasColumnType("int");
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("IsDeleted")
-                    b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("QuizId")
+                    b.Property<int>("QuizId")
                         .HasColumnType("int");
 
                     b.Property<double>("Score")
@@ -292,7 +197,6 @@ namespace QSpace.Data.Migrations
 
                     b.Property<string>("Statement")
                         .IsRequired()
-                    b.Property<string>("FCMToken")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Time")
@@ -312,24 +216,25 @@ namespace QSpace.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("InstructorId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsActive")
-                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsCompleted")
-                    b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InstructorId1");
 
                     b.ToTable("Quizzes");
                 });
@@ -340,19 +245,12 @@ namespace QSpace.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.Property<double?>("AvgScore")
                         .HasColumnType("float");
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Code")
                         .IsRequired()
-                    b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -360,17 +258,14 @@ namespace QSpace.Data.Migrations
 
                     b.Property<DateTime>("HeldAt")
                         .HasColumnType("datetime2");
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                    b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<double?>("MeanScore")
                         .HasColumnType("float");
 
-                    b.Property<int?>("QuizId")
+                    b.Property<int>("QuizId")
                         .HasColumnType("int");
 
                     b.Property<int?>("StudentsCount")
@@ -389,11 +284,8 @@ namespace QSpace.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
-                    b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -402,14 +294,9 @@ namespace QSpace.Data.Migrations
 
                     b.Property<double>("Score")
                         .HasColumnType("float");
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -430,16 +317,90 @@ namespace QSpace.Data.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("QuestionId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentsQuestions");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FCMToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
-                    b.HasIndex("StudentId");
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("StudentsQuestions");
                     b.ToTable("AspNetUsers");
                 });
 
@@ -454,7 +415,6 @@ namespace QSpace.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                     b.HasOne("QSpace.Data.DbEntities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -464,7 +424,6 @@ namespace QSpace.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                     b.HasOne("QSpace.Data.DbEntities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -480,7 +439,6 @@ namespace QSpace.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                     b.HasOne("QSpace.Data.DbEntities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -490,7 +448,6 @@ namespace QSpace.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                     b.HasOne("QSpace.Data.DbEntities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -502,16 +459,29 @@ namespace QSpace.Data.Migrations
                 {
                     b.HasOne("QSpace.Data.DbEntities.QuizDbEntity", "Quiz")
                         .WithMany("Questions")
-                        .HasForeignKey("QuizId");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.QuizDbEntity", b =>
+                {
+                    b.HasOne("QSpace.Data.DbEntities.User", "Instructor")
+                        .WithMany("Quizes")
+                        .HasForeignKey("InstructorId1");
+
+                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("QSpace.Data.DbEntities.SessionDbEntity", b =>
                 {
                     b.HasOne("QSpace.Data.DbEntities.QuizDbEntity", "Quiz")
                         .WithMany("Sessions")
-                        .HasForeignKey("QuizId");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
                 });
@@ -559,18 +529,17 @@ namespace QSpace.Data.Migrations
                 });
 
             modelBuilder.Entity("QSpace.Data.DbEntities.SessionDbEntity", b =>
-            modelBuilder.Entity("QSpace.Data.DbEntities.QuizesDbEntity", b =>
                 {
                     b.Navigation("Students");
-                    b.HasOne("QSpace.Data.DbEntities.User", null)
-                        .WithMany("Quizes")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("QSpace.Data.DbEntities.StudentDbEntity", b =>
-            modelBuilder.Entity("QSpace.Data.DbEntities.User", b =>
                 {
                     b.Navigation("StudentsQuestions");
+                });
+
+            modelBuilder.Entity("QSpace.Data.DbEntities.User", b =>
+                {
                     b.Navigation("Quizes");
                 });
 #pragma warning restore 612, 618

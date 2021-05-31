@@ -9,5 +9,7 @@ namespace QSpace.Core.Dtos
     {
         [Required]
         public string Name { get; set; }
+        [Required]
+        public string InstructorId { get; set; }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using QSpace.Core.Dtos;
+using QSpace.Core.ViewModels;
 using QSpace.Data.Data;
 using QSpace.Data.DbEntities;
+using QSpace.Infrastructure.Services.Files;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace QSpace.Infrastructure.Services.MCQuestion
 {
@@ -12,42 +15,50 @@ namespace QSpace.Infrastructure.Services.MCQuestion
     {
         private readonly QSpaceDbContext _DB;
         private readonly IMapper _mapper;
+        private readonly IFileService _fileService;
 
-        public MCQuestionService(QSpaceDbContext DB, IMapper mapper)
+        public MCQuestionService(QSpaceDbContext DB, IMapper mapper, IFileService fileService)
         {
             _DB = DB;
             _mapper = mapper;
+            _fileService = fileService;
         }
-
-        public void Create(CreateMCQuestionDto dto) {
+        public async Task Create(CreateMCQuestionDto dto) {
             var mcq = _mapper.Map<MCQuestionDbEntity>(dto);
-            _DB.MCQustions.Add(mcq);
+            if (dto.AttachmentURL != null)
+            {
+                mcq.AttachmentURL = await _fileService.SaveFile(dto.AttachmentURL, "Attachments");
+                await _DB.MCQustions.AddAsync(mcq);
+            }
+            else
+                _DB.MCQustions.Add(mcq);
             _DB.SaveChanges();
         }
-        public void Update(UpdateMCQuestionDto dto) {
+        public async Task Update(UpdateMCQuestionDto dto) {
             var mcq = _DB.MCQustions.Find(dto.Id);
             if (mcq != null) {
-                if (!dto.A.Equals(mcq.A))
-                    mcq.A = dto.A;
-                if (!dto.B.Equals(mcq.B))
-                    mcq.B = dto.B;
-                if (!dto.C.Equals(mcq.C))
-                    mcq.C = dto.C;
-                if (!dto.D.Equals(mcq.D))
-                    mcq.D = dto.D;
-                if (!dto.CorrectAnswer.Equals(mcq.CorrectAnswer))
-                    mcq.CorrectAnswer = dto.CorrectAnswer;
-                if (!dto.Statement.Equals(mcq.Statement))
-                    mcq.Statement = dto.Statement;
-                if (dto.Time != mcq.Time)
-                    mcq.Time = dto.Time;
-                if (dto.Score != mcq.Score)
-                    mcq.Score = dto.Score;
-                if (dto.DifficultyLevel != mcq.DifficultyLevel)
-                    mcq.DifficultyLevel = dto.DifficultyLevel;
+                var UpdatedMcq = _mapper.Map<UpdateMCQuestionDto, MCQuestionDbEntity>(dto, mcq);
+                if (dto.AttachmentURL != null)
+                {
+                    mcq.AttachmentURL = await _fileService.SaveFile(dto.AttachmentURL, "Attachments");                    
+                }
             }
             _DB.MCQustions.Update(mcq);
             _DB.SaveChanges();
+        }
+        public void ChangeActive(int Id)
+        {
+            var mcq = _DB.MCQustions.Find(Id);
+            if (mcq == null)
+            {
+                throw new Exception();
+            }
+            else
+            {
+                mcq.IsActive = !mcq.IsActive;
+                _DB.MCQustions.Update(mcq);
+                _DB.SaveChanges();
+            }
         }
         public bool Delete(int Id)
         {
@@ -60,7 +71,7 @@ namespace QSpace.Infrastructure.Services.MCQuestion
                 return true;
             }
             return false;
-        }
-       
+        }  
+        
     }
 }

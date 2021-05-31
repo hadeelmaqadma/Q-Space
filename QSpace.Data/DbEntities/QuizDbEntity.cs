@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace QSpace.Data.DbEntities
@@ -11,9 +12,8 @@ namespace QSpace.Data.DbEntities
         public string Name { get; set; }    
         public bool IsActive { get; set; }
         public bool IsCompleted { get; set; }
-        
-        public int InstructorId { get; set; }
-
+        [Required]
+        public string InstructorId;
         public User Instructor { get; set; }
         public List<MCQuestionDbEntity> Questions { get; set; }
         public List<SessionDbEntity> Sessions { get; set; }
@@ -21,6 +21,8 @@ namespace QSpace.Data.DbEntities
     {
             IsActive = false;
             IsCompleted = false;
+            if (Instructor != null && InstructorId == null)
+                InstructorId = Instructor.Id;
         }
     }
 }

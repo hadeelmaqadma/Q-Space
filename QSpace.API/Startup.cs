@@ -25,6 +25,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QSpace.Infrastructure.Services.Files;
+using QSpace.Infrastructure.Services.Session;
 
 namespace QSpace.API
 {
@@ -116,12 +118,14 @@ namespace QSpace.API
              
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IFileService, FileService>();
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
             services.AddScoped<IQuizService, QuizService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IMCQuestionService, MCQuestionService>();
+            services.AddScoped<ISessionService, SessionService>();
             services.AddSwaggerGen();
         }
 

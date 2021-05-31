@@ -13,7 +13,7 @@ namespace QSpace.API.Controllers
 {
     
     [Route("api/[controller]/[action]")]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class BaseController :Controller
     {
         protected APIResponseViewModel GetResponse(object data = null, string message = "Done")
@@ -27,15 +27,14 @@ namespace QSpace.API.Controllers
             return result;
         }
         protected APIResponseViewModel GetExceptionResponse(string message)
-    {
-            var result = new APIResponseViewModel()
         {
+            var result = new APIResponseViewModel()
+            {
                 Status = false,
                 Message = message,
                 Data = null
             };
             return result;
         }
-
     }
 }

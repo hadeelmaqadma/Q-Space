@@ -15,6 +15,7 @@ namespace QSpace.API.Controllers
         {
             _service = service;
         }
+
         [HttpPost]
         public IActionResult Create([FromForm] CreateMCQuestionDto dto) {
             _service.Create(dto);
@@ -25,6 +26,13 @@ namespace QSpace.API.Controllers
             _service.Update(dto);
             return Ok(GetResponse());
         }
+        [HttpPut]
+        public IActionResult ChangeActive(int questionId)
+        {
+            _service.ChangeActive(questionId);
+            return Ok(GetResponse());
+        }
+
         [HttpDelete]
         public IActionResult Delete(int Id) {
             if(_service.Delete(Id))

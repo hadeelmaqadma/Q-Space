@@ -11,6 +11,7 @@ namespace QSpace.Infrastructure.Services.Users
     {
         List<UserViewModel> GetUsers();
         Task<bool> Create(CreateUserDto dto);
+        List<QuizViewModel> GetQuizes(string Id);
         Task Update(UpdateUserDto dto);
         void Delete(string Id);
     }

@@ -13,16 +13,21 @@ namespace QSpace.Data.DbEntities
         public DateTime CreatedAt { get; set; }
         [Required]
         public DateTime HeldAt { get; set; }
+        
         public double? AvgScore { get; set; }
         public double? MeanScore { get; set; }
         public int? StudentsCount { get; set; }
-        [ForeignKey("QuizId")]
+        public int QuizId { get; set; }
         public QuizDbEntity Quiz { get; set; }
         public List<StudentDbEntity> Students { get; set; }
 
         public SessionDbEntity() {
+            
             CreatedAt = DateTime.Now;
             Code = Guid.NewGuid().ToString().Trim().Replace("-", "").Substring(0, 8);
+            AvgScore = 0;
+            MeanScore = 0;
+            StudentsCount = 0;
         }
     }
 }

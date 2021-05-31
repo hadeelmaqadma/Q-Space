@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using QSpace.Core.Dtos;
 using QSpace.Core.ViewModels;
 using QSpace.Data.Data;
@@ -30,8 +31,8 @@ namespace QSpace.Infrastructure.Services.Users
             var users = _DB.Users.Where(x => !x.IsDelete).ToList();
             return _Mapper.Map<List<UserViewModel>>(users);
         }
-        public List<QuizDbEntity> GetQuizes() {
-            var quizes = _DB.Quizes.Where(x => !x.IsDeleted).ToList();
+        public List<QuizViewModel> GetQuizes(string Id) {
+            var quizes = _DB.Users.Include(y => y.Quizes).Where(x => x.Id.Equals(Id)).Select(q => q.Quizes).ToList();
             return _Mapper.Map<List<QuizViewModel>>(quizes);
         }
 
