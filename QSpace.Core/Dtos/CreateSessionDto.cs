@@ -5,9 +5,12 @@ using System.Text;
 
 namespace QSpace.Core.Dtos
 {
-    public class CreateQuizDto
+    public class CreateSessionDto
     {
         [Required]
-        public string Name { get; set; }
+        public DateTime HeldAt { get; set; }
+        [Required]
+        public int QuizId { get; set; }
+        
     }
 }

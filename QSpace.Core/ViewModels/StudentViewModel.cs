@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace QSpace.Core.Dtos
+namespace QSpace.Core.ViewModels
 {
-    public class CreateQuizDto
+    public class StudentViewModel
     {
-        [Required]
         public string Name { get; set; }
+        public double Score { get; set; }
     }
 }

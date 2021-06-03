@@ -1,5 +1,6 @@
 ﻿using QSpace.Core.Dtos;
 using QSpace.Core.ViewModels;
+using QSpace.Data.DbEntities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,8 +11,9 @@ namespace QSpace.Infrastructure.Services.Users
     public interface IUserService
     {
         List<UserViewModel> GetUsers();
-        Task<bool> Create(CreateUserDto dto);
-        Task Update(UpdateUserDto dto);
-        void Delete(string Id);
+        Task<string> Create(CreateUserDto dto);
+        Task<string> Update(UpdateUserDto dto);
+        Task Delete(string Id);
+        List<QuizViewModel> GetQuizzes(string Id);
     }
 }

@@ -11,7 +11,7 @@ namespace QSpace.API.Controllers
 {
     public class UserController : BaseController
     {
-        private IUserService _userService;
+        private readonly IUserService _userService;
 
         public UserController(IUserService userService)
         {
@@ -27,7 +27,7 @@ namespace QSpace.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateUserDto dto)
+        public async Task<IActionResult> Create([FromBody]CreateUserDto dto)
         {
             var id = await _userService.Create(dto);
             return Ok(GetResponse(id));
@@ -36,14 +36,14 @@ namespace QSpace.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateUserDto dto)
         {
-            await _userService.Update(dto);
-            return Ok(GetResponse());
+            var id = await _userService.Update(dto);
+            return Ok(GetResponse(id));
         }
 
         [HttpDelete]
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
-            _userService.Delete(id);
+            await _userService.Delete(id);
             return Ok(GetResponse());
         }
 

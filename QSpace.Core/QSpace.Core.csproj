@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.5" />
     <Folder Include="Enums\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\QSpace.Data\QSpace.Data.csproj" />
   </ItemGroup>
 
 </Project>

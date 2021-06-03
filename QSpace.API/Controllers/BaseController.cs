@@ -16,6 +16,7 @@ namespace QSpace.API.Controllers
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class BaseController :Controller
     {
+        protected string UserId = "";
         protected APIResponseViewModel GetResponse(object data = null, string message = "Done")
         {
             var result = new APIResponseViewModel()
@@ -36,6 +37,6 @@ namespace QSpace.API.Controllers
             };
             return result;
         }
-
+        
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using QSpace.Core.Dtos;
+using QSpace.Core.Exceptions;
 using QSpace.Core.ViewModels;
 using QSpace.Data.Data;
 using QSpace.Data.DbEntities;
@@ -15,8 +17,8 @@ namespace QSpace.Infrastructure.Services.Users
     public class UserService : IUserService
     {
         private readonly IMapper _Mapper;
-        private QSpaceDbContext _DB;
-        private UserManager<QSpace.Data.DbEntities.User> _userManager;
+        private readonly QSpaceDbContext _DB;
+        private readonly UserManager<QSpace.Data.DbEntities.User> _userManager;
 
         public UserService(QSpaceDbContext DB, UserManager<QSpace.Data.DbEntities.User> userManager, IMapper Mapper)
         {
@@ -30,53 +32,50 @@ namespace QSpace.Infrastructure.Services.Users
             var users = _DB.Users.Where(x => !x.IsDelete).ToList();
             return _Mapper.Map<List<UserViewModel>>(users);
         }
-        public List<QuizDbEntity> GetQuizes() {
-            var quizes = _DB.Quizes.Where(x => !x.IsDeleted).ToList();
-            return _Mapper.Map<List<QuizViewModel>>(quizes);
+        public List<QuizViewModel> GetQuizzes(string Id) {
+            var quizzes = _DB.Users.Include(x => x.Quizes).Where(x => x.Id == Id).Select(x => x.Quizes).ToList();
+            return _Mapper.Map<List<QuizViewModel>>(quizzes);
         }
 
-        public async Task<bool> Create(CreateUserDto dto)
+        public async Task<string> Create(CreateUserDto dto)
         {
-            /*Console.WriteLine("*****************");
+            if( _DB.Users.Any(x => x.UserName == dto.Email)) // used UserName
+            {
+                throw new InvalidUsernameException();
+            }
             var user = _Mapper.Map<User>(dto);
-            Console.WriteLine("/////////////////");
-            var result = await _userManager.CreateAsync(user, "Ahmed11$$");
-
-            return result.Succeeded;*/
-            var user = new QSpace.Data.DbEntities.User();
-            user.FCMToken = "";
-            user.Name = dto.Name;
-            user.Email = dto.Email;
-            user.PhoneNumber = dto.PhoneNumber;
-            user.CreatedAt = DateTime.Now;
-            user.UserName = dto.PhoneNumber;
-
-            var result = await _userManager.CreateAsync(user, "Hend2744$");
-
-            return result.Succeeded;
+            user.UserName = dto.Email;
+            var result = await _userManager.CreateAsync(user, dto.Password);
+            if (!result.Succeeded)
+            {
+                throw new InValidPasswordException();
+            }
+            return user.Id;
         }
-        public async Task Update(UpdateUserDto dto)
+        public async Task<string> Update(UpdateUserDto dto)
         {
-            /*
-            //var user = _DB.Users.SingleOrDefault(x => x.Id == dto.Id && !x.IsDelete);
-            var user = _Mapper.Map<User>(dto);
-            await _userManager.UpdateAsync(user);
-            */
             var user = _DB.Users.SingleOrDefault(x => x.Id == dto.Id && !x.IsDelete);
-            user.Name = dto.Name;
-            user.FCMToken = dto.FCMToken;
-            user.Email = dto.Email;
+            if (user == null)
+            {
+                throw new NotFoundException();
+            }
+            _Mapper.Map<UpdateUserDto,User>(dto,user);
             user.UpdatedAt = DateTime.Now;
-
             await _userManager.UpdateAsync(user);
-
+            return user.Id;
         }
-        public void Delete(string Id)
+
+        public async Task Delete(string Id)
         {
             var user = _DB.Users.SingleOrDefault(x => x.Id == Id && !x.IsDelete);
+            if (user == null)
+            {
+                throw new NotFoundException();
+            }
             user.IsDelete = true;
-            _DB.Users.Update(user);
-            _DB.SaveChanges();
+            //_DB.Users.Update(user);
+            //_DB.SaveChanges();
+            await _userManager.UpdateAsync(user);
         }
     }
 }

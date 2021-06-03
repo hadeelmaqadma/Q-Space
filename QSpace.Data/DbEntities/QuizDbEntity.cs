@@ -1,8 +1,24 @@
-﻿namespace QSpace.Data.DbEntities
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace QSpace.Data.DbEntities
 {
-    public class QuizDbEntity
+    public class QuizDbEntity : BaseDbEntity
     {
-        public int Id { get; set; }
-        public bool IsDeleted { get; internal set; }
+        public string Name { get; set; }    
+        public bool IsActive { get; set; }
+        public bool IsCompleted { get; set; }
+
+        public int InstructorId { get; set; }
+
+        public User Instructor { get; set; }
+        public List<MCQuestionDbEntity> Questions { get; set; }
+        public List<SessionDbEntity> Sessions { get; set; }
+        public QuizDbEntity()
+        {
+            IsActive = false;
+            IsCompleted = false;
+        }
     }
 }

@@ -5,9 +5,12 @@ using System.Text;
 
 namespace QSpace.Core.Dtos
 {
-    public class CreateQuizDto
+    public class ChangePasswordDto
     {
         [Required]
-        public string Name { get; set; }
+        public string OldPassword { get; set; }
+        [Required]
+        public string NewPassword { get; set; }
+
     }
 }
