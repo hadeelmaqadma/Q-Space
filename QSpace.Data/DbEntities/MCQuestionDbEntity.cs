@@ -14,7 +14,7 @@ namespace QSpace.Data.DbEntities
         public int Time { get; set; }
         [Required]
         public string Statement { get; set; }
-        public string AttachmentURL { get; set; }
+        public string? AttachmentURL { get; set; }
         public double Score { get; set; }
         public bool IsActive { get; set; }
         [Required]
@@ -30,7 +30,8 @@ namespace QSpace.Data.DbEntities
         public string D { get; set; }
         [Required]
         public string CorrectAnswer { get; set; }
-        [ForeignKey("QuizId")]
+        [Required]
+        public int QuizId { get; set; }
         public QuizDbEntity Quiz { get; set; }
         public List<StudentQuestionsDbEntity> StudentsQuestions { get; set; }
         public MCQuestionDbEntity() {

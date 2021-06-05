@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.5" />
     <Folder Include="Enums\" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.5" />
   </ItemGroup>
 
 </Project>

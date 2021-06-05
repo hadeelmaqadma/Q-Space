@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using QSpace.Data.DbEntities;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace QSpace.Data.Data
@@ -14,7 +16,18 @@ namespace QSpace.Data.Data
         {
 
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.json")
+                   .Build();
+                var connectionString = configuration["ConnectionStrings:DefaultConnection"];
+                optionsBuilder.UseSqlServer(connectionString);
+            }
+        }
         public DbSet<MCQuestionDbEntity> MCQustions { get; set; }
         public DbSet<QuizDbEntity> Quizzes { get; set; }
         public DbSet<SessionDbEntity> Sessions { get; set; }
@@ -23,8 +36,16 @@ namespace QSpace.Data.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<StudentQuestionsDbEntity>().HasKey(x => new { x.QuestionId, x.StudentId });
+            //builder.Entity<StudentQuestionsDbEntity>().HasOne(x => x.Student).WithMany(y => y.StudentsQuestions).HasForeignKey(x => x.StudentId).OnDelete(DeleteBehavior.NoAction);
+            //builder.Entity<StudentQuestionsDbEntity>().HasOne(x => x.Question).WithMany(y => y.StudentsQuestions).HasForeignKey(x => x.QuestionId).OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<StudentQuestionsDbEntity>().HasQueryFilter(x => !x.IsDeleted);
             builder.Entity<QuizDbEntity>().HasQueryFilter(x => !x.IsDeleted);
-            builder.Entity<StudentQuestionsDbEntity>().HasKey(x => new { x.QuestionId, x.StudentId});
-        }
+            builder.Entity<SessionDbEntity>().HasQueryFilter(x => !x.IsDeleted);
+            builder.Entity<StudentDbEntity>().HasQueryFilter(x => !x.IsDeleted);
+            builder.Entity<MCQuestionDbEntity>().HasQueryFilter(x => !x.IsDeleted);
+            
+            
+        } 
     }
 }

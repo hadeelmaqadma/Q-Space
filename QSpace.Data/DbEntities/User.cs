@@ -17,7 +17,5 @@ namespace QSpace.Data.DbEntities
         public List<QuizDbEntity> Quizes { get; set; }
         public bool IsDelete { get; set; }
 
-        
-
     }
 }

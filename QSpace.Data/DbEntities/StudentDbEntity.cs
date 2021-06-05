@@ -14,7 +14,6 @@ namespace QSpace.Data.DbEntities
         public int SessionId { get; set; }
         public SessionDbEntity Session { get; set; }
         public List<StudentQuestionsDbEntity> StudentsQuestions { get; set; }
-
         public StudentDbEntity()
         {
             Score = 0;

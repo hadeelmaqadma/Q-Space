@@ -2,7 +2,7 @@
 
 namespace QSpace.Data.Migrations
 {
-    public partial class init3 : Migration
+    public partial class init4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -59,7 +59,7 @@ namespace QSpace.Infrastructure.Services.Auth
             if (result.Succeeded)
             {
                 // We can check here if the user is active
-                user.FCMToken = dto.FCM;
+                //user.FCMToken = dto.FCM;
 
                 _DB.Users.Update(user);
                 _DB.SaveChanges();

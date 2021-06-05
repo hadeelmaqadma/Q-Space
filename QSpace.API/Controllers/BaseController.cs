@@ -28,9 +28,9 @@ namespace QSpace.API.Controllers
             return result;
         }
         protected APIResponseViewModel GetExceptionResponse(string message)
-    {
-            var result = new APIResponseViewModel()
         {
+            var result = new APIResponseViewModel()
+            {
                 Status = false,
                 Message = message,
                 Data = null

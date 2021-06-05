@@ -18,9 +18,9 @@ namespace QSpace.Infrastructure.Services.Users
     {
         private readonly IMapper _Mapper;
         private readonly QSpaceDbContext _DB;
-        private readonly UserManager<QSpace.Data.DbEntities.User> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public UserService(QSpaceDbContext DB, UserManager<QSpace.Data.DbEntities.User> userManager, IMapper Mapper)
+        public UserService(QSpaceDbContext DB, UserManager<User> userManager, IMapper Mapper)
         {
             _DB = DB;
             _userManager = userManager;

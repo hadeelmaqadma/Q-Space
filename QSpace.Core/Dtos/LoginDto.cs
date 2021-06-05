@@ -10,6 +10,6 @@ namespace QSpace.Core.Dtos
 
         public string Password { get; set; }
 
-        public string FCM { get; set; }
+        //public string FCM { get; set; }
     }
 }

@@ -10,10 +10,9 @@ namespace QSpace.Core.Dtos
     public class CreateMCQuestionDto
     {
         [Required]
-        public int Time { get; set; }
-
-        [Required]
         public string Statement { get; set; }
+        [Required]
+        public int Time { get; set; }   
 
         [Required]
         public string A { get; set; }
@@ -25,15 +24,12 @@ namespace QSpace.Core.Dtos
         public string D { get; set; }
         [Required]
         public string CorrectAnswer { get; set; }
-        public IFormFile AttachmentURL { get; set; }
-
         [Required]
         public double Score { get; set; }
-
         [Required]
         public DifficultyLevel DifficultyLevel { get; set; }
-       
+        public IFormFile AttachmentURL { get; set; }
         [Required]
-        public int QuizId { get; set; }
+        public int QuizId { get; set;}
     }
 }

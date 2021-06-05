@@ -15,11 +15,6 @@
 	<ItemGroup>
 		<FrameworkReference Include="Microsoft.AspNetCore.App"></FrameworkReference>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\QSpace.Core\QSpace.Core.csproj" />
-	  <ProjectReference Include="..\QSpace.Data\QSpace.Data.csproj" />
-	</ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QSpace.Core\QSpace.Core.csproj" />
     <ProjectReference Include="..\QSpace.Data\QSpace.Data.csproj" />

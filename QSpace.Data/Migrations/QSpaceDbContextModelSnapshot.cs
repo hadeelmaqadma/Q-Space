@@ -189,7 +189,7 @@ namespace QSpace.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("QuizId")
+                    b.Property<int>("QuizId")
                         .HasColumnType("int");
 
                     b.Property<double>("Score")
@@ -216,9 +216,6 @@ namespace QSpace.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("InstructorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("InstructorId1")
                         .HasColumnType("nvarchar(450)");
 
@@ -232,6 +229,7 @@ namespace QSpace.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -267,7 +265,7 @@ namespace QSpace.Data.Migrations
                     b.Property<double?>("MeanScore")
                         .HasColumnType("float");
 
-                    b.Property<int?>("QuizId")
+                    b.Property<int>("QuizId")
                         .HasColumnType("int");
 
                     b.Property<int?>("StudentsCount")
@@ -316,6 +314,9 @@ namespace QSpace.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.HasKey("QuestionId", "StudentId");
@@ -461,7 +462,9 @@ namespace QSpace.Data.Migrations
                 {
                     b.HasOne("QSpace.Data.DbEntities.QuizDbEntity", "Quiz")
                         .WithMany("Questions")
-                        .HasForeignKey("QuizId");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
                 });
@@ -479,7 +482,9 @@ namespace QSpace.Data.Migrations
                 {
                     b.HasOne("QSpace.Data.DbEntities.QuizDbEntity", "Quiz")
                         .WithMany("Sessions")
-                        .HasForeignKey("QuizId");
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
                 });

@@ -13,18 +13,20 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using QSpace.Data;
 using QSpace.Data.Data;
+using QSpace.Infrastructure.Services;
+using QSpace.Infrastructure.Services.Auth;
+using QSpace.Infrastructure.Services.Users;
 using QSpace.Infrastructure.AutoMapper;
 using QSpace.Infrastructure.Services.MCQuestion;
 using QSpace.Infrastructure.Services.Quiz;
 using QSpace.Infrastructure.Services.Student;
-using QSpace.Infrastructure.Services;
-using QSpace.Infrastructure.Services.Auth;
-using QSpace.Infrastructure.Services.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QSpace.Infrastructure.Services.Files;
+using QSpace.Infrastructure.Services.Session;
 
 namespace QSpace.API
 {
@@ -116,7 +118,15 @@ namespace QSpace.API
              
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IFileService, FileService>();
             services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
+            services.AddScoped<IQuizService, QuizService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IMCQuestionService, MCQuestionService>();
+            services.AddScoped<ISessionService, SessionService>();
+            services.AddSwaggerGen();
         }
 
 

@@ -27,7 +27,11 @@ namespace QSpace.API.Controllers
             var result = _service.GetById(Id);
             return Ok(GetResponse(result));
         }
-
+        [HttpGet]
+        public IActionResult GetHostingSessions(int Id) {
+            var result = _service.GetHostingSessions(Id);
+            return Ok(GetResponse(result));
+        }
         [HttpPost]
         public IActionResult Create([FromBody] CreateQuizDto dto)
         {
@@ -38,6 +42,30 @@ namespace QSpace.API.Controllers
         public IActionResult Update([FromBody] UpdateQuizDto dto)
         {
             _service.Update(dto);
+            return Ok(GetResponse());
+        }
+        [HttpPut]
+        public IActionResult Activate(int Id)
+        {
+            _service.Activate(Id);
+            return Ok(GetResponse());
+        }
+        [HttpPut]
+        public IActionResult Deactivate(int Id)
+        {
+            _service.Deactivate(Id);
+            return Ok(GetResponse());
+        }
+        [HttpPut]
+        public IActionResult MarkAsInCompleted(int Id)
+        {
+            _service.MarkAsInCompleted(Id);
+            return Ok(GetResponse());
+        }
+        [HttpPut]
+        public IActionResult MarkAsCompleted(int Id)
+        {
+            _service.MarkAsCompleted(Id);
             return Ok(GetResponse());
         }
         [HttpDelete]
