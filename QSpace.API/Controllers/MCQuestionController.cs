@@ -46,6 +46,11 @@ namespace QSpace.API.Controllers
             var results = _service.GetById(id);
             return Ok(GetResponse(results));
         }
+        public IActionResult GetOne(int Id)
+        {
+            var result = _service.GetById(9);
+            return View(result);
+        }
 
     }
 }

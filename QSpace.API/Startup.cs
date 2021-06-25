@@ -61,10 +61,24 @@ namespace QSpace.API
                 config.SignIn.RequireConfirmedPhoneNumber = false;
             }).AddEntityFrameworkStores<QSpaceDbContext>()
                 .AddDefaultTokenProviders();
+            services.AddControllersWithViews();
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
-            
-             services.AddAuthentication(config =>
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IFileService, FileService>();
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
+            services.AddScoped<IQuizService, QuizService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IMCQuestionService, MCQuestionService>();
+            services.AddScoped<ISessionService, SessionService>();
+
+            services.AddRazorPages();
+            services.AddControllersWithViews();
+            /*
+            services.AddAuthentication(config =>
             {
                 config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 config.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -85,10 +99,10 @@ namespace QSpace.API
               });
              
 
-            //services.AddSwaggerGen();
+             services.AddSwaggerGen();
             
              services.AddSwaggerGen(c =>
-            {
+             {
                 c.AddSecurityDefinition("Bearer",
                     new OpenApiSecurityScheme
                     {
@@ -115,22 +129,25 @@ namespace QSpace.API
                     }
                 });
             }); 
-             
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddSingleton<IFileService, FileService>();
-            services.AddControllersWithViews();
-            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+             */
+            //services.AddScoped<IUserService, UserService>();
+            //services.AddScoped<IAuthService, AuthService>();
+            //services.AddSingleton<IFileService, FileService>();
+            //services.AddControllersWithViews();
+            //services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
-            services.AddScoped<IQuizService, QuizService>();
-            services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<IMCQuestionService, MCQuestionService>();
-            services.AddScoped<ISessionService, SessionService>();
-            services.AddSwaggerGen();
+            //services.AddScoped<IQuizService, QuizService>();
+            //services.AddScoped<IStudentService, StudentService>();
+            //services.AddScoped<IMCQuestionService, MCQuestionService>();
+            //services.AddScoped<ISessionService, SessionService>();
+            //services.AddSwaggerGen();
+            
+            //services.AddRazorPages();
         }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -146,34 +163,40 @@ namespace QSpace.API
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QSpace");
-                c.RoutePrefix = string.Empty;
-            });
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            
-            app.UseRequestLocalization();
-
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapDefaultControllerRoute();
-            });
-            /*
-             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-             */
+        /*
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "QSpace");
+            c.RoutePrefix = string.Empty;
+        });
+        
+       */ 
+
+            
+            //app.UseRequestLocalization();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //    endpoints.MapDefaultControllerRoute();
+            //});
+            
+            
+             
         }
     }
 }

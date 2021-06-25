@@ -12,7 +12,13 @@ namespace QSpace.API.Controllers
     {
         public IActionResult Index()
         {
-            return Redirect("/swagger");
+            //return Redirect("/swagger");
+            return View();
+        }
+
+        public IActionResult Test()
+        {
+            return View();
         }
 
     }

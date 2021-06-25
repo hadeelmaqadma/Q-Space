@@ -19,11 +19,14 @@ namespace QSpace.API.Controllers
         public IActionResult GetAll()
         {
             var result = _service.GetAll();
-            return Ok(GetResponse(result));
+            //return Ok(GetResponse(result));
+            return View(result);
         }
-
         [HttpGet]
-        public IActionResult GetById(int Id) {
+        
+        [HttpGet]
+        public IActionResult GetById(int Id)
+        {
             var result = _service.GetById(Id);
             return Ok(GetResponse(result));
         }
