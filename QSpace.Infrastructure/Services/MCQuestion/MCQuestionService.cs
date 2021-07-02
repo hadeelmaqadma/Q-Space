@@ -73,15 +73,14 @@ namespace QSpace.Infrastructure.Services.MCQuestion
             return false;
         }  
         
-        public MCQuestionViewModel GetById(int id)
+        public UpdateMCQuestionDto GetById(int id)
         {
             var mcq = _DB.MCQustions.Find(id);
             if (mcq == null) return null;
 
-            var mcqVM = _mapper.Map<MCQuestionViewModel>(mcq);
+            var mcqVM = _mapper.Map<UpdateMCQuestionDto>(mcq);
 
             return mcqVM; 
-
         }
         
     }

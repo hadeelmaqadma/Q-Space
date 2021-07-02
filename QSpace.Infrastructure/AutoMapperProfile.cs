@@ -13,10 +13,7 @@ namespace QSpace.API
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserViewModel>();
-            CreateMap<CreateUserDto, User>();
-            CreateMap<UpdateUserDto, User>();
-            CreateMap<QuizViewModel, QuizDbEntity>();
+            
         }
     }
 }

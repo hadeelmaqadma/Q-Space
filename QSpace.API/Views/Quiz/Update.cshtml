@@ -1,0 +1,50 @@
+﻿@model UpdateQuizDto
+
+@{
+    ViewData["Title"] = "Update";
+}
+<h1>Update Quiz</h1>
+
+<hr />
+<form asp-action="Update">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input asp-for="Id" type="hidden" />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+   
+    @if (Model != null) { 
+        <div class="form-group">
+            <br />
+            @if (!Model.IsActive)
+            {
+                <a href="~/Quiz/Activate?Id=@Model.Id" class="btn btn-primary ml-sm-4 pl-sm-1 pt-2">Activate</a>
+            }
+            else
+            {
+                <a href="~/Quiz/Deactivate?Id=@Model.Id" class="btn btn-secondary ml-sm-4 pl-sm-1 pt-2">Deactivate</a>
+            }
+
+            @if (!Model.IsCompleted)
+            {
+                <a href="~/Quiz/MarkAsCompleted?Id=@Model.Id" class="btn btn-primary ml-sm-4 pl-sm-1 pt-2">Set Complete</a>
+            }
+            else
+            {
+                <a href="~/Quiz/MarkAsInCompleted?Id=@Model.Id" class="btn btn-secondary ml-sm-4 pl-sm-1 pt-2">Set Incomplete</a>
+            }
+        </div>        
+    }
+    <div class="form-group">
+        <input type="submit" value="Update" class="btn btn-primary" />
+        <a asp-action="GetAll" class="btn btn-danger">Back</a>
+    </div>
+</form>

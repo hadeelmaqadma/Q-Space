@@ -1,0 +1,24 @@
+﻿.jumbotron {
+    position: relative;
+    display: block;
+    top: 5px;
+    left: 5px;
+    background-image: url(https://www.elearning.fse.manchester.ac.uk/wp-content/uploads/2018/03/quiz-2137664__340.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 60%;
+    opacity: 0.5;
+    z-index: -1;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'sans-serif';
+    font-size:large;
+    color: blue
+}
+.actions_container {
+    height: 200px;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-between;
+}
+
