@@ -21,15 +21,17 @@ namespace QSpace.Core.Dtos
         [Required]
         public string C { get; set; }
         [Required]
-        public string D { get; set; }
-        [Required]
+        public string D { get; set; }        
+        [Display(Name = "Correct Answer")]
+        [Required(ErrorMessage = "Correct Answer must match one of the options")]
         public string CorrectAnswer { get; set; }
         [Required]
-        public double Score { get; set; }
-        [Required]
+        public double Score { get; set; }        
+        [Display(Name = "Difficulty Level")]
+        [Required(ErrorMessage = "Difficulty Level is required")]
         public DifficultyLevel DifficultyLevel { get; set; }
+        [Display(Name = "Attachment URL")]
         public IFormFile AttachmentURL { get; set; }
-        [Required]
         public int QuizId { get; set;}
     }
 }

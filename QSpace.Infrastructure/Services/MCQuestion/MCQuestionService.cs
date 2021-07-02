@@ -36,8 +36,28 @@ namespace QSpace.Infrastructure.Services.MCQuestion
         }
         public async Task Update(UpdateMCQuestionDto dto) {
             var mcq = _DB.MCQustions.Find(dto.Id);
-            if (mcq != null) {
-                var UpdatedMcq = _mapper.Map<UpdateMCQuestionDto, MCQuestionDbEntity>(dto, mcq);
+            if (mcq != null)
+            {
+                if (!mcq.A.Equals(dto.A))
+                    mcq.A = dto.A;
+                if (!mcq.B.Equals(dto.B))
+                    mcq.B = dto.B;
+                if (!mcq.C.Equals(dto.C))
+                    mcq.C = dto.C;
+                if (!mcq.D.Equals(dto.D))
+                    mcq.D = dto.D;
+                if (!mcq.CorrectAnswer.Equals(dto.CorrectAnswer))
+                    mcq.CorrectAnswer = dto.CorrectAnswer;
+                if (!mcq.Statement.Equals(dto.Statement))
+                    mcq.Statement = dto.Statement;
+                if (mcq.Score != dto.Score)
+                    mcq.Score = dto.Score;
+                if (mcq.Time != dto.Time)
+                    mcq.Time = dto.Time;
+                if (mcq.DifficultyLevel != dto.DifficultyLevel)
+                    mcq.DifficultyLevel = dto.DifficultyLevel;
+            
+               // _mapper.Map<UpdateMCQuestionDto, MCQuestionDbEntity>(dto, mcq);
                 if (dto.AttachmentURL != null)
                 {
                     mcq.AttachmentURL = await _fileService.SaveFile(dto.AttachmentURL, "Attachments");                    

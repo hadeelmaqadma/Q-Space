@@ -3,14 +3,13 @@
 @{
     ViewData["Title"] = "Update";
 }
-
 <h1>Update Question</h1>
-
 <hr />
 <form asp-action="Update">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <input asp-for="Id" type="hidden" />
+    <input asp-for="QuizId" type="hidden" />
 
     <div class="row">
         <div class="col-md-6">
@@ -82,8 +81,10 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="CorrectAnswer" class="control-label"></label>
-                <input asp-for="CorrectAnswer" class="form-control" />
-                <span asp-validation-for="CorrectAnswer" class="text-danger"></span>
+                <input asp-for="CorrectAnswer" class="form-control" />                
+                @if (ViewBag.ErrorMessage != null) { 
+                     <span asp-validation-for="CorrectAnswer" class="text-danger">@ViewBag.ErrorMessage</span>
+                }
             </div>
         </div>
     </div>
