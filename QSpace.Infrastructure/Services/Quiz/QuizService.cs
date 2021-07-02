@@ -21,19 +21,24 @@ namespace QSpace.Infrastructure.Services.Quiz
             _mapper = mapper;
         }
         public List<QuizViewModel> GetAll() {
-             var quizzes = _DB.Quizzes.Include(x => x.Questions).Where(x => x.IsActive).ToList();
+             var quizzes = _DB.Quizzes.Include(x => x.Questions).Where(x => !x.IsDeleted).ToList();
              return _mapper.Map<List<QuizViewModel>>(quizzes);
         }
 
-        public QuizViewModel GetById(int Id) {
+        public UpdateQuizDto GetById(int Id) {
+            var quiz = _DB.Quizzes.Include(x => x.Questions).SingleOrDefault(x => x.Id == Id);
+            return quiz == null ? null : _mapper.Map<UpdateQuizDto>(quiz);
+        }
+        public QuizViewModel GetQuizVMById(int Id)
+        {
             var quiz = _DB.Quizzes.Include(x => x.Questions).SingleOrDefault(x => x.Id == Id);
             return quiz == null ? null : _mapper.Map<QuizViewModel>(quiz);
         }
         public List<MCQuestionViewModel> GetQuestions(int Id) {
-            var questions = _DB.Quizzes.Include(x => x.Questions).
-                Where(y => !y.IsDeleted && y.IsActive && y.IsCompleted && y.Id == Id)
-                .Select(q => q.Questions).ToList();
-            return _mapper.Map<List<MCQuestionViewModel>>(questions);
+            var quiz = _DB.Quizzes.Include(x => x.Questions).
+                Where(y => !y.IsDeleted && y.Id == Id)
+                .SingleOrDefault();
+            return _mapper.Map<List<MCQuestionViewModel>>(quiz.Questions);
         }
         public List<SessionViewModel> GetHostingSessions(int quizId) {
             var sessions = _DB.Sessions.Where(z => z.QuizId == quizId).ToList();

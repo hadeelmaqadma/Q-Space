@@ -1,4 +1,4 @@
-﻿<h1> Get all from the Quiz views ><</h1>
+﻿<h1> Get all from the Quiz views ></h1>
 @model List<QuizViewModel>
 @*<link href="~/css/question.css" rel="stylesheet" />*@
 <style>
@@ -8,28 +8,35 @@
     }
 </style>
 
-@foreach (var m in Model)
+@if (Model.Any())
 {
-    <h5>Quiz id is: @m.Id</h5>
-    <h5>Quiz name is: @m.Name</h5>
-    @foreach (var q in m.Questions)
-    {
-        <div class="container mt-sm-5 my-1">
-            <div class="question ml-sm-5 pl-sm-5 pt-2">
-                <div class="py-2 h5"><b>@q.Statement</b></div>
-                <div class="ml-md-3 ml-sm-3 pl-md-5 pt-sm-0 pt-3" id="options">
-                    <label class="options">@q.A <input type="radio" name="radio"> <span class="checkmark"></span> </label>
-                    <label class="options">@q.B <input type="radio" name="radio"> <span class="checkmark"></span> </label>
-                    <label class="options">@q.C <input type="radio" name="radio"> <span class="checkmark"></span> </label>
-                    <label class="options">@q.D <input type="radio" name="radio"> <span class="checkmark"></span> </label>
-                </div>
-            </div>
-            <div class="d-flex align-items-center pt-3">
-                <div id="prev"> <button class="btn btn-primary">Previous</button> </div>
-                <div class="ml-auto mr-sm-5"> <button class="btn btn-success">Next</button> </div>
-            </div>
-        </div>
-    }
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var q in Model)
+        {
+            <tr>
+                <th>@q.Id</th>
+                <th>@q.Name</th>
+                <th>
+                    <a href="~/Quiz/Questions?Id=@q.Id" class="btn btn-secondary">View Questions</a>
+                    <a href="~/Quiz/Update?Id=@q.Id" class="ml-auto mr-sm- btn btn-warning">Update</a>
+                    <a href="~/Quiz/Delete?Id=@q.Id" class="ml-auto mr-sm- btn btn-danger">Delete</a>
+                </th>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        No Quizzes Added yet!
+    </div>
 }
 
 

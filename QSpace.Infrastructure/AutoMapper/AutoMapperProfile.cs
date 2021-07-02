@@ -17,9 +17,15 @@ namespace QSpace.Infrastructure.AutoMapper
         {
             CreateMap<CreateStudentDto, StudentDbEntity>();
             CreateMap<StudentDbEntity, StudentViewModel>();
+            CreateMap<User, UserViewModel>();
+            CreateMap<CreateUserDto, User>();
+            CreateMap<UpdateUserDto, User>();
+            CreateMap<QuizViewModel, QuizDbEntity>();
             CreateMap<CreateQuizDto, QuizDbEntity>();
             CreateMap<UpdateQuizDto, QuizDbEntity>();
+            CreateMap<QuizDbEntity, UpdateQuizDto>();
             CreateMap<MCQuestionDbEntity, MCQuestionViewModel>();
+            CreateMap<MCQuestionDbEntity, UpdateMCQuestionDto>();
             CreateMap<CreateMCQuestionDto, MCQuestionDbEntity>();
             CreateMap<QuizDbEntity, QuizViewModel>().ForMember(dest => dest.Questions, act => act.MapFrom(src => src.Questions));
             CreateMap<CreateSessionDto, SessionDbEntity>();

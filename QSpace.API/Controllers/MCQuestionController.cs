@@ -15,30 +15,49 @@ namespace QSpace.API.Controllers
         {
             _service = service;
         }
-
-        [HttpPost]
-        public IActionResult Create([FromForm] CreateMCQuestionDto dto) {
-            _service.Create(dto);
-            return Ok(GetResponse());
-        }
-        [HttpPut]
-        public IActionResult Update([FromForm] UpdateMCQuestionDto dto) {
-            _service.Update(dto);
-            return Ok(GetResponse());
-        }
-        [HttpPut]
-        public IActionResult ChangeActive(int questionId)
+        public IActionResult Index()
         {
-            _service.ChangeActive(questionId);
-            return Ok(GetResponse());
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Create(int Id)
+        {
+            return View(new CreateMCQuestionDto());
+        }
+        [HttpPost]
+        public IActionResult Create(CreateMCQuestionDto dto) {
+            if (ModelState.IsValid) {
+                _service.Create(dto);
+                return Redirect("~/Quiz/Questions?Id="+ (dto.QuizId));
+            }
+            return View(dto);
+        }
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            return View(_service.GetById(Id));
+        }
+        [HttpPut]
+        public IActionResult Update(UpdateMCQuestionDto dto) {
+            if (ModelState.IsValid)
+            {
+                _service.Update(dto);
+                return RedirectToAction("GetAll", "Quiz");
+            }
+            return View(dto);
+        }     
+        [HttpPut]
+        public IActionResult ChangeActive(int Id)
+        {
+            var quizId = _service.GetById(Id).QuizId; 
+            _service.ChangeActive(Id);            
+            return Redirect("~/Quiz/Questions?Id=" + quizId);
         }
 
-        [HttpDelete]
         public IActionResult Delete(int Id) {
-            if(_service.Delete(Id))
-                return Ok(GetResponse());
-            else
-                return Ok(GetResponse(message:"Record Not found"));
+            var quizId = _service.GetById(Id).QuizId;
+            _service.Delete(Id);
+            return Redirect("~/Quiz/Questions?Id=" + quizId);
         }
         [HttpGet]
         public IActionResult GetById(int id)
@@ -48,9 +67,8 @@ namespace QSpace.API.Controllers
         }
         public IActionResult GetOne(int Id)
         {
-            var result = _service.GetById(9);
+            var result = _service.GetById(Id);
             return View(result);
         }
-
     }
 }

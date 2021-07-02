@@ -14,6 +14,6 @@ namespace QSpace.Infrastructure.Services.MCQuestion
         void ChangeActive(int Id);
         bool Delete(int Id);
 
-        MCQuestionViewModel GetById(int id);
+        UpdateMCQuestionDto GetById(int id);
     }
 }
