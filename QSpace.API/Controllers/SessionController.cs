@@ -26,7 +26,6 @@ namespace QSpace.API.Controllers
         {
             var session = _service.GetSessionById(sessionId);
             return Ok(GetResponse(data: session));
-
         }
         [HttpGet]
         public IActionResult GetQuiz(int sessionId)

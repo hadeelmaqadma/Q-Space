@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Views\Student\" />
     <Folder Include="wwwroot\Attachments\" />
   </ItemGroup>
 
