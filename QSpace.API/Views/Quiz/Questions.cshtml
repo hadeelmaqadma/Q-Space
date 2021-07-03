@@ -1,0 +1,48 @@
+﻿@model List<MCQuestionViewModel>
+@{
+    ViewBag.Id = Convert.ToInt32(Context.Request.Query["Id"]);
+    int counter = 1;
+}
+<link href="~/css/question2.css" rel="stylesheet" />
+<div class="questions_container">
+    <h2 class="display-1">Questions List</h2>
+    <p>Quiz Id: @ViewBag.Id</p>
+    <a href="~/MCQuestion/Create/Id=@ViewBag.Id" class="btn btn-info ml-sm-4 pl-sm-1 pt-2" style="margin-bottom: 5px ">Add Question</a>
+    <br />
+    @if(Model.Any())
+    {
+        @foreach (var q in Model)
+        {
+            <div class="question_container mt-sm-5 my-1">
+                <div class="question ml-sm-5 pl-sm-5 pt-2">
+                    <div class="py-2 h5"><b>@counter. @q.Statement</b></div>
+                    <div class="ml-sm-5 pl-sm-5 pt-2" id="options">
+                        <label class="options">@q.A <input type="radio" name="radio"> <span class="checkmark"></span> </label>
+                        <label class="options">@q.B <input type="radio" name="radio"> <span class="checkmark"></span> </label>
+                        <label class="options">@q.C <input type="radio" name="radio"> <span class="checkmark"></span> </label>
+                        <label class="options">@q.D <input type="radio" name="radio"> <span class="checkmark"></span> </label>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-center pt-3" style="margin-bottom: 2px">
+                    @if (!q.IsActive)
+                    {
+                        <a href="~/MCQuestion/ChangeActive?Id=@q.Id" class="btn btn-success ml-sm-4 pl-sm-1 pt-2">Activate</a>
+                    }
+                    else
+                    {
+                        <a href="~/MCQuestion/ChangeActive?Id=@q.Id" class="btn btn-secondary ml-sm-4 pl-sm-1 pt-2">Deactivate</a>
+                    }
+                    <a href="~/MCQuestion/Update?Id=@q.Id" class="btn btn-warning ml-sm-4 pl-sm-1 pt-2">Update</a>
+                    <a href="~/MCQuestion/Delete?Id=@q.Id" class="btn btn-danger ml-sm-4 pl-sm-1 pt-2">Delete</a>
+                    <hr />
+                </div>     
+             </div>
+        }
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            No Questions Added yet!
+        </div>
+    }
+</div>

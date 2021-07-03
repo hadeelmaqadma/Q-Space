@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QSpace.Data.DbEntities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +12,13 @@ namespace QSpace.API.Controllers
     {
         public IActionResult Index()
         {
-            return Redirect("/swagger");
+            //return Redirect("/swagger");
+            return View();
+        }
+
+        public IActionResult Test()
+        {
+            return View();
         }
 
     }

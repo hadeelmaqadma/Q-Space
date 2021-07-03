@@ -1,0 +1,42 @@
+﻿<h1> Get all from the Quiz views ></h1>
+@model List<QuizViewModel>
+@*<link href="~/css/question.css" rel="stylesheet" />*@
+<style>
+    .options {
+        position: relative;
+        padding-left: 40px
+    }
+</style>
+
+@if (Model.Any())
+{
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var q in Model)
+        {
+            <tr>
+                <th>@q.Id</th>
+                <th>@q.Name</th>
+                <th>
+                    <a href="~/Quiz/Questions?Id=@q.Id" class="btn btn-secondary">View Questions</a>
+                    <a href="~/Quiz/Update?Id=@q.Id" class="ml-auto mr-sm- btn btn-warning">Update</a>
+                    <a href="~/Quiz/Delete?Id=@q.Id" class="ml-auto mr-sm- btn btn-danger">Delete</a>
+                </th>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        No Quizzes Added yet!
+    </div>
+}
+
+

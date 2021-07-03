@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\" />
     <Folder Include="Enums\" />
-    <Folder Include="ViewModels\" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.5" />
   </ItemGroup>
 
 </Project>
