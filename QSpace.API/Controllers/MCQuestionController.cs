@@ -26,9 +26,17 @@ namespace QSpace.API.Controllers
         }
         [HttpPost]
         public IActionResult Create(CreateMCQuestionDto dto) {
+            List<string> options = new List<string>(){ dto.A, dto.B, dto.C, dto.D };
             if (ModelState.IsValid) {
-                _service.Create(dto);
-                return Redirect("~/Quiz/Questions?Id="+ (dto.QuizId));
+                if (!options.Contains(dto.CorrectAnswer))
+                {
+                    ViewBag.ErrorMessage = "Correcr Answer should match one of the options";
+                    return View(dto);
+                }
+                else {
+                    _service.Create(dto);
+                    return Redirect("~/Quiz/Questions?Id=" + (dto.QuizId));
+                }
             }
             return View(dto);
         }
@@ -37,20 +45,29 @@ namespace QSpace.API.Controllers
         {
             return View(_service.GetById(Id));
         }
-        [HttpPut]
+        [HttpPost]
         public IActionResult Update(UpdateMCQuestionDto dto) {
+            List<string> options = new List<string>() { dto.A, dto.B, dto.C, dto.D };
             if (ModelState.IsValid)
             {
-                _service.Update(dto);
-                return RedirectToAction("GetAll", "Quiz");
+                if (!options.Contains(dto.CorrectAnswer))
+                {
+                    ViewBag.ErrorMessage = "Correcr Answer should match one of the options";
+                    return View(dto);
+                }
+                else
+                {
+                    _service.Update(dto);
+                    return Redirect("~/Quiz/Questions?Id=" + (dto.QuizId));
+                }
             }
             return View(dto);
         }     
-        [HttpPut]
+        
         public IActionResult ChangeActive(int Id)
         {
             var quizId = _service.GetById(Id).QuizId; 
-            _service.ChangeActive(Id);            
+            _service.ChangeActive(Id);
             return Redirect("~/Quiz/Questions?Id=" + quizId);
         }
 
@@ -59,7 +76,6 @@ namespace QSpace.API.Controllers
             _service.Delete(Id);
             return Redirect("~/Quiz/Questions?Id=" + quizId);
         }
-        [HttpGet]
         public IActionResult GetById(int id)
         {
             var results = _service.GetById(id);
