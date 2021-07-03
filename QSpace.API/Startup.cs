@@ -27,6 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using QSpace.Infrastructure.Services.Files;
 using QSpace.Infrastructure.Services.Session;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace QSpace.API
 {
@@ -46,9 +47,6 @@ namespace QSpace.API
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-
-            
-            
 
             services.AddIdentity<QSpace.Data.DbEntities.User, IdentityRole>(config =>
             {
@@ -77,7 +75,8 @@ namespace QSpace.API
 
             services.AddRazorPages();
             services.AddControllersWithViews();
-            /*
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
             services.AddAuthentication(config =>
             {
                 config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -129,7 +128,7 @@ namespace QSpace.API
                     }
                 });
             }); 
-             */
+             
             //services.AddScoped<IUserService, UserService>();
             //services.AddScoped<IAuthService, AuthService>();
             //services.AddSingleton<IFileService, FileService>();
@@ -169,6 +168,14 @@ namespace QSpace.API
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "QSpace");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

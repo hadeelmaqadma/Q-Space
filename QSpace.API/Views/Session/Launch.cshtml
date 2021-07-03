@@ -1,0 +1,28 @@
+﻿@model StudentSessionViewModel
+
+    <h1> Lunching this session: ></h1>
+
+
+
+
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>Code</th>
+            <th>HeldAt</th>
+            <th>Actions</th>
+        </tr>
+        <tr>
+            <th>@Model.Code</th>
+            <th>@Model.HeldAt</th>
+            <th>
+                <a href="~/Session/Close?Id=@Model.Id" class="btn btn-success">Close</a>
+                <a href="~/Quiz/Questions?Id=@Model.QuizId" class="btn btn-secondary">View Questions</a>
+
+            </th>
+        </tr>
+
+
+    </table>
+
+

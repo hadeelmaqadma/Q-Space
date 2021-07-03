@@ -31,6 +31,7 @@ namespace QSpace.Infrastructure.AutoMapper
             CreateMap<CreateSessionDto, SessionDbEntity>();
             CreateMap<UpdateSessionDto, SessionDbEntity>();
             CreateMap<SessionDbEntity, SessionViewModel>();
+            CreateMap<SessionDbEntity, StudentSessionViewModel>();
 
             // For Tests
             CreateMap<byte, DifficultyLevel>().ConvertUsing(

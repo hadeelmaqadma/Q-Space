@@ -16,6 +16,7 @@ namespace QSpace.API.Controllers
         {
             _service = service;
         }
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
@@ -79,31 +80,31 @@ namespace QSpace.API.Controllers
             }
             return View(dto);
         }
-       
+        [HttpPut]
         public IActionResult Activate(int Id)
         {
             _service.Activate(Id);
             return RedirectToAction("GetAll");
         }
-        
+        [HttpPut]
         public IActionResult Deactivate(int Id)
         {
             _service.Deactivate(Id);
             return RedirectToAction("GetAll");
         }
-        
+        [HttpPut]
         public IActionResult MarkAsInCompleted(int Id)
         {
             _service.MarkAsInCompleted(Id);
             return RedirectToAction("GetAll");
         }
-        
+        [HttpPut]
         public IActionResult MarkAsCompleted(int Id)
         {
             _service.MarkAsCompleted(Id);
             return RedirectToAction("GetAll");
         }
-        
+        [HttpDelete]
         public IActionResult Delete(int Id) {
             _service.Delete(Id);
             return RedirectToAction("GetAll");
