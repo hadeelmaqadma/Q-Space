@@ -4,9 +4,9 @@ using System.Text;
 
 namespace QSpace.Core.ViewModels
 {
-    public class SessionViewModel 
+    public class StudentSessionViewModel
     {
-        public string x { get; set; }
+        public int Id { get; set; }
         public string Code { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime HeldAt { get; set; }

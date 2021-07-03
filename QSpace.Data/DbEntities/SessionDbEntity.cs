@@ -13,7 +13,7 @@ namespace QSpace.Data.DbEntities
         public DateTime CreatedAt { get; set; }
         [Required]
         public DateTime HeldAt { get; set; }
-        
+        public Boolean IsActive { get; set; }
         public double? AvgScore { get; set; }
         public double? MeanScore { get; set; }
         public int? StudentsCount { get; set; }
@@ -28,6 +28,7 @@ namespace QSpace.Data.DbEntities
             AvgScore = 0;
             MeanScore = 0;
             StudentsCount = 0;
+            IsActive = false;
         }
     }
 }

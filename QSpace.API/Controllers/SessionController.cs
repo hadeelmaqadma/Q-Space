@@ -16,22 +16,46 @@ namespace QSpace.API.Controllers
             _service = service;
         }
         [HttpGet]
-        public IActionResult GetSessions()
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult GetAll()
         {
             var sessions = _service.GetAll();
-            return Ok(GetResponse(data: sessions));
+            //return Ok(GetResponse(data: sessions));
+            return View(sessions);
+        }
+        [HttpGet]
+        public IActionResult GetFutureSessions()
+        {
+            var sessions = _service.GetFutureSessions();
+            //return Ok(GetResponse(data: sessions));
+            return View();
         }
         [HttpGet]
         public IActionResult GetSessionById(int sessionId)
         {
             var session = _service.GetSessionById(sessionId);
-            return Ok(GetResponse(data: session));
+            //return Ok(GetResponse(data: session));
+            return View(session);
 
         }
+        
         [HttpGet]
         public IActionResult GetQuiz(int sessionId)
         {
             var quiz = _service.GetQuiz(sessionId);
+            if (quiz == null)
+                return Ok();
+            return Ok(GetResponse(data: quiz));
+        }
+        [HttpGet]
+        public IActionResult JoinSession(string Code)
+        {
+            var session = _service.GetSessionByCode(Code);
+            var quiz = _service.GetQuiz(session.Id);
             if (quiz == null)
                 return Ok();
             return Ok(GetResponse(data: quiz));
@@ -44,16 +68,53 @@ namespace QSpace.API.Controllers
             else
                 return Ok(GetResponse(data: students));
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
         [HttpPost]
-        public IActionResult Create([FromBody] CreateSessionDto dto) {
-            _service.Create(dto);
-            return Ok(GetResponse());
+        public IActionResult Create(CreateSessionDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                _service.Create(dto);
+                return RedirectToAction("Index");
+            }
+            return View(dto);
+        }
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            return View(_service.GetSessionById(Id));
         }
         [HttpPut]
-        public IActionResult Update([FromForm] UpdateSessionDto dto)
+        public IActionResult Update(UpdateSessionDto dto)
         {
-            _service.Update(dto);
-            return Ok(GetResponse());
+            if (ModelState.IsValid)
+            {
+                _service.Update(dto);
+                return RedirectToAction("Index");
+            }
+            return View(dto);
+        }
+        //[HttpPost]
+        //public IActionResult Create([FromBody] CreateSessionDto dto) {
+        //    _service.Create(dto);
+        //    return Ok(GetResponse());
+        //}
+        //[HttpPut]
+        //public IActionResult Update([FromForm] UpdateSessionDto dto)
+        //{
+        //    _service.Update(dto);
+        //    return Ok(GetResponse());
+        //}
+        [HttpPut]
+        public IActionResult Launch(int sessionId)
+        {
+            var session = _service.Launch(sessionId);
+            //return Ok(GetResponse());
+            return View(session);
         }
         [HttpDelete]
         public IActionResult Delete(int Id)
@@ -63,5 +124,6 @@ namespace QSpace.API.Controllers
             else
                 return Ok(GetResponse(message: "Record Not found"));
         }
+
     }
 }

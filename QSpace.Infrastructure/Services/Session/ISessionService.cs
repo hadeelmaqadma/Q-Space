@@ -9,12 +9,16 @@ namespace QSpace.Infrastructure.Services.Session
 {
     public interface ISessionService
     {
-        List<SessionViewModel> GetAll();
+        List<StudentSessionViewModel> GetAll();
+        List<StudentSessionViewModel> GetFutureSessions();
         SessionViewModel GetSessionById(int sessionId);
+        StudentSessionViewModel GetSessionByCode(string sessionCode);
         QuizViewModel GetQuiz(int sessionId);
         List<StudentViewModel> GetStudents(int sessionId);
         void Create(CreateSessionDto dto);
         void Update(UpdateSessionDto dto);
+        public StudentSessionViewModel Launch(int sessionId);
+        public void Close(int sessionId);
         void UpdateStudentsCount(int sessionId, bool increase);
         bool Delete(int Id);
     }

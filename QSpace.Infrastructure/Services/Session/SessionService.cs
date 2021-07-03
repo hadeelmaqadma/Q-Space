@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
 using QSpace.Core.Dtos;
 using QSpace.Core.ViewModels;
@@ -17,22 +19,41 @@ namespace QSpace.Infrastructure.Services.Session
         private readonly QSpaceDbContext _DB;
         private readonly IMapper _mapper;
 
-        public SessionService(QSpaceDbContext DB, IMapper mapper)
+        public SessionService(QSpaceDbContext DB, IMapper mapper, IUrlHelperFactory urlHelperFactory,
+                   IActionContextAccessor actionContextAccessor)
         {
             _DB = DB;
             _mapper = mapper;
+            var urlHelper =
+              urlHelperFactory.GetUrlHelper(actionContextAccessor.ActionContext);
         }
-        public List<SessionViewModel> GetAll() {
+        public List<StudentSessionViewModel> GetAll()
+        {
             var sessions = _DB.Sessions.ToList();
             if (sessions.Count != 0)
-                return _mapper.Map<List<SessionViewModel>>(sessions);
+                return _mapper.Map<List<StudentSessionViewModel>>(sessions);
+            return null;
+        }
+        public List<StudentSessionViewModel> GetFutureSessions()
+        {
+            var sessions = _DB.Sessions.Where(x => x.HeldAt > DateTime.Now).ToList();
+            if (sessions.Count != 0)
+                return _mapper.Map<List<StudentSessionViewModel>>(sessions);
             return null;
         }
 
-        public SessionViewModel GetSessionById(int sessionId) {
+        public SessionViewModel GetSessionById(int sessionId)
+        {
             var session = _DB.Sessions.SingleOrDefault(x => x.Id == sessionId);
             if (session != null)
                 return _mapper.Map<SessionViewModel>(session);
+            return null;
+        }
+        public StudentSessionViewModel GetSessionByCode(string sessionCode)
+        {
+            var session = _DB.Sessions.SingleOrDefault(x => x.Code == sessionCode);
+            if (session != null && session.IsActive)
+                return _mapper.Map<StudentSessionViewModel>(session);
             return null;
         }
         public QuizViewModel GetQuiz(int sessionId) {
@@ -48,9 +69,25 @@ namespace QSpace.Infrastructure.Services.Session
             _DB.Sessions.Add(session);
             _DB.SaveChanges();
         }
-        public void Update(UpdateSessionDto dto) {
+        public void Update(UpdateSessionDto dto)
+        {
             var session = _DB.Sessions.Find(dto.Id);
             _mapper.Map<UpdateSessionDto, SessionDbEntity>(dto, session);
+            _DB.Sessions.Update(session);
+            _DB.SaveChanges();
+        }
+        public StudentSessionViewModel Launch(int sessionId)
+        {
+            var session = _DB.Sessions.Find(sessionId);
+            session.IsActive = true;
+            _DB.Sessions.Update(session);
+            _DB.SaveChanges();
+            return _mapper.Map<StudentSessionViewModel>(session);
+        }
+        public void Close(int sessionId)
+        {
+            var session = _DB.Sessions.Find(sessionId);
+            session.IsActive = false;
             _DB.Sessions.Update(session);
             _DB.SaveChanges();
         }

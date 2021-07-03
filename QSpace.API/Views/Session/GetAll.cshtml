@@ -1,0 +1,36 @@
+﻿<h1> Get all from the Session views ></h1>
+@model List<StudentSessionViewModel>
+
+@if (Model.Any())
+{
+    <br />
+    <table class="table table-hover">
+        <tr>
+            <th>Code</th>
+            <th>HeldAt</th>
+            <th>Actions</th>
+        </tr>
+
+        @foreach (var q in Model)
+        {
+            <tr>
+                <th>@q.Code</th>
+                <th>@q.HeldAt</th>
+                <th>
+                    <h5>@q.Id</h5>
+                    <a href="~/Session/GetSessionById?Id=@q.Id" class="btn btn-secondary">ViewSession</a>
+                    <a href="~/Session/Update?Id=@q.Id" class="ml-auto mr-sm- btn btn-warning">Update</a>
+                    <a href="~/Session/Delete?Id=@q.Id" class="ml-auto mr-sm- btn btn-danger">Delete</a>
+                </th>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-warning">
+        No Sessions Added yet!
+    </div>
+}
+
+
