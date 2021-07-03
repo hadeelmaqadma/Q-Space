@@ -16,6 +16,8 @@ namespace QSpace.Data.DbEntities
         public string FCMToken { get; set; }
         public List<QuizDbEntity> Quizes { get; set; }
         public bool IsDelete { get; set; }
-
+        public User() {
+            CreatedAt = DateTime.Now;
+        }
     }
 }

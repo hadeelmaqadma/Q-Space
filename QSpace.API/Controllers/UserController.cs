@@ -24,7 +24,16 @@ namespace QSpace.API.Controllers
             var users = _userService.GetUsers();
             return Ok(GetResponse(users));
         }
-
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody]CreateUserDto dto)

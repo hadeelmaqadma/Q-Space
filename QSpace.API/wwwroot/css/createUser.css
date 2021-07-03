@@ -1,0 +1,33 @@
+﻿body {
+    margin: 0 0 0 0;
+    padding: 0;
+    background-color: #fff;
+    align-content: center
+}
+
+h3 {
+    font-size: 32px;
+    color: #47b2e4;
+    align-content: center
+}
+
+.container #reg-row #reg-column #reg-box {
+    margin-top: 60px;
+    max-width: 600px;
+    height: 460px;
+    border: 1px solid #47b2e4;
+    background-color: #fff;
+    align-items: center;
+}
+    .container #reg-row #reg-column #reg-box #reg-form {
+        padding: 20px;
+    }
+
+    .container #reg-row #reg-column #reg-box #reg-form{
+        margin-top: -60px;
+}
+
+#submit-btn {
+    color: #47b2e4;
+    position: center
+}
